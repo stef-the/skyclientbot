@@ -1,0 +1,35 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const discord_akairo_1 = require("discord-akairo");
+const curl = require("curlrequest");
+class discord extends discord_akairo_1.Command {
+    constructor() {
+        super("discord", {
+            aliases: ["discord"],
+            args: [
+                {
+                    id: 'server',
+                    type: 'string'
+                },
+            ],
+        });
+    }
+    exec(message, args) {
+        curl.request({ url: "https://raw.githubusercontent.com/nacrt/SkyblockClient-REPO/main/files/discords.json" }, (e, data) => {
+            data = JSON.parse(data);
+            let found = false;
+            data.forEach(element => {
+                if (element.id == args.server || element.nicknames.includes(args.server)) {
+                    message.channel.send(`discord.gg/${element.code}`);
+                    found = true;
+                }
+            });
+            if (!found) {
+                message.channel.send("I don't seem to have a discord server for that!");
+            }
+        });
+    }
+    ;
+}
+exports.default = discord;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZGlzY29yZC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uLy4uL3NyYy9jb21tYW5kcy9za3ljbGllbnQvZGlzY29yZC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLG1EQUF5QztBQUV6QyxNQUFNLElBQUksR0FBRyxPQUFPLENBQUMsYUFBYSxDQUFDLENBQUM7QUFFcEMsTUFBcUIsT0FBUSxTQUFRLHdCQUFPO0lBQ3hDO1FBQ0ksS0FBSyxDQUFDLFNBQVMsRUFBRTtZQUNiLE9BQU8sRUFBRSxDQUFDLFNBQVMsQ0FBQztZQUNwQixJQUFJLEVBQUU7Z0JBQ0Y7b0JBQ0ksRUFBRSxFQUFFLFFBQVE7b0JBQ1osSUFBSSxFQUFFLFFBQVE7aUJBQ2pCO2FBQ0o7U0FDSixDQUFDLENBQUM7SUFDUCxDQUFDO0lBRUQsSUFBSSxDQUFDLE9BQU8sRUFBRSxJQUFJO1FBRWQsSUFBSSxDQUFDLE9BQU8sQ0FDUixFQUFFLEdBQUcsRUFBRSxzRkFBc0YsRUFBRSxFQUMvRixDQUFDLENBQUMsRUFBRSxJQUFJLEVBQUUsRUFBRTtZQUVSLElBQUksR0FBRyxJQUFJLENBQUMsS0FBSyxDQUFDLElBQUksQ0FBQyxDQUFDO1lBRXhCLElBQUksS0FBSyxHQUFHLEtBQUssQ0FBQTtZQUNqQixJQUFJLENBQUMsT0FBTyxDQUFDLE9BQU8sQ0FBQyxFQUFFO2dCQUNuQixJQUFJLE9BQU8sQ0FBQyxFQUFFLElBQUksSUFBSSxDQUFDLE1BQU0sSUFBSSxPQUFPLENBQUMsU0FBUyxDQUFDLFFBQVEsQ0FBQyxJQUFJLENBQUMsTUFBTSxDQUFDLEVBQUU7b0JBQ3RFLE9BQU8sQ0FBQyxPQUFPLENBQUMsSUFBSSxDQUFDLGNBQWMsT0FBTyxDQUFDLElBQUksRUFBRSxDQUFDLENBQUM7b0JBQ25ELEtBQUssR0FBRyxJQUFJLENBQUE7aUJBQ2Y7WUFDTCxDQUFDLENBQUMsQ0FBQztZQUNILElBQUksQ0FBQyxLQUFLLEVBQUU7Z0JBQ1IsT0FBTyxDQUFDLE9BQU8sQ0FBQyxJQUFJLENBQUMsaURBQWlELENBQUMsQ0FBQTthQUMxRTtRQUNMLENBQUMsQ0FBQyxDQUFDO0lBQ1gsQ0FBQztJQUFBLENBQUM7Q0FDTDtBQWpDRCwwQkFpQ0MiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBDb21tYW5kIH0gZnJvbSBcImRpc2NvcmQtYWthaXJvXCI7XG5cbmNvbnN0IGN1cmwgPSByZXF1aXJlKFwiY3VybHJlcXVlc3RcIik7XG5cbmV4cG9ydCBkZWZhdWx0IGNsYXNzIGRpc2NvcmQgZXh0ZW5kcyBDb21tYW5kIHtcbiAgICBjb25zdHJ1Y3RvcigpIHtcbiAgICAgICAgc3VwZXIoXCJkaXNjb3JkXCIsIHtcbiAgICAgICAgICAgIGFsaWFzZXM6IFtcImRpc2NvcmRcIl0sXG4gICAgICAgICAgICBhcmdzOiBbXG4gICAgICAgICAgICAgICAge1xuICAgICAgICAgICAgICAgICAgICBpZDogJ3NlcnZlcicsXG4gICAgICAgICAgICAgICAgICAgIHR5cGU6ICdzdHJpbmcnXG4gICAgICAgICAgICAgICAgfSxcbiAgICAgICAgICAgIF0sXG4gICAgICAgIH0pO1xuICAgIH1cblxuICAgIGV4ZWMobWVzc2FnZSwgYXJncykge1xuXG4gICAgICAgIGN1cmwucmVxdWVzdChcbiAgICAgICAgICAgIHsgdXJsOiBcImh0dHBzOi8vcmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbS9uYWNydC9Ta3libG9ja0NsaWVudC1SRVBPL21haW4vZmlsZXMvZGlzY29yZHMuanNvblwiIH0sXG4gICAgICAgICAgICAoZSwgZGF0YSkgPT4ge1xuXG4gICAgICAgICAgICAgICAgZGF0YSA9IEpTT04ucGFyc2UoZGF0YSk7XG5cbiAgICAgICAgICAgICAgICBsZXQgZm91bmQgPSBmYWxzZVxuICAgICAgICAgICAgICAgIGRhdGEuZm9yRWFjaChlbGVtZW50ID0+IHtcbiAgICAgICAgICAgICAgICAgICAgaWYgKGVsZW1lbnQuaWQgPT0gYXJncy5zZXJ2ZXIgfHwgZWxlbWVudC5uaWNrbmFtZXMuaW5jbHVkZXMoYXJncy5zZXJ2ZXIpKSB7XG4gICAgICAgICAgICAgICAgICAgICAgICBtZXNzYWdlLmNoYW5uZWwuc2VuZChgZGlzY29yZC5nZy8ke2VsZW1lbnQuY29kZX1gKTtcbiAgICAgICAgICAgICAgICAgICAgICAgIGZvdW5kID0gdHJ1ZVxuICAgICAgICAgICAgICAgICAgICB9XG4gICAgICAgICAgICAgICAgfSk7XG4gICAgICAgICAgICAgICAgaWYgKCFmb3VuZCkge1xuICAgICAgICAgICAgICAgICAgICBtZXNzYWdlLmNoYW5uZWwuc2VuZChcIkkgZG9uJ3Qgc2VlbSB0byBoYXZlIGEgZGlzY29yZCBzZXJ2ZXIgZm9yIHRoYXQhXCIpXG4gICAgICAgICAgICAgICAgfVxuICAgICAgICAgICAgfSk7XG4gICAgfTtcbn1cbiJdfQ==
